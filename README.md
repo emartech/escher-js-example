@@ -1,4 +1,6 @@
-escher-js-example
-=================
+Code examples for EscherJS - HTTP request signing lib
+=====================================================
 
-JavaScript example for the Escher HTTP request signing library
+Code examples for the Escher HTTP request signing library (https://github.com/emartech/escher-js).
+
+Check out native calls and validations, and Express, Flatiron and Koa validations.
