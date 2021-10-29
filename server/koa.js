@@ -19,9 +19,9 @@ router.get('/', function(ctx, next) {
 router.get('/validate_request', function(ctx, next) {
   try {
     escher.authenticate(ctx.req, keyDB);
-    ctx.body = "OK";
+    ctx.body = "OK from Koa";
   } catch(e) {
-    ctx.body = "ERROR: " + e.message;
+    ctx.body = "ERROR from Koa: " + e.message;
   }
   next();
 });

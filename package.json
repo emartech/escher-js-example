@@ -7,5 +7,11 @@
     "express": "^4",
     "koa": "^2",
     "koa-router": "^10"
+  },
+  "scripts": {
+    "client": "node client/client.js",
+    "start-native": "node server/native.js",
+    "start-express": "node server/express.js",
+    "start-koa": "node server/koa.js"
   }
 }

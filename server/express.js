@@ -15,9 +15,9 @@ app.get('/', function (req, res) {
 app.get('/validate_request', function(req, res){
   try {
     escher.authenticate(req, keyDB);
-    res.send("OK");
+    res.send("OK from Express");
   } catch(e) {
-    res.send("ERROR: " + e.message);
+    res.send("ERROR from express: " + e.message);
   }
 });
 
