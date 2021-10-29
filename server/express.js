@@ -1,14 +1,11 @@
-var Escher = require('escher-auth'),
-    express = require('express'),
-    app = express();
+const Escher = require('escher-auth');
+const express = require('express');
 
-var escher = new Escher({
-  accessKeyId: 'EscherExample',
-  apiSecret: 'TheBeginningOfABeautifulFriendship'
-});
+const app = express();
 
-var keyDB = function(secretKey) {
-  return "TheBeginningOfABeautifulFriendship";
+const escher = new Escher();
+const keyDB = function(accessKeyId) {
+  return {'EscherExample': 'TheBeginningOfABeautifulFriendship'}[accessKeyId];
 }
 
 app.get('/', function (req, res) {
@@ -17,7 +14,7 @@ app.get('/', function (req, res) {
 
 app.get('/validate_request', function(req, res){
   try {
-    escher.validateRequest(req, keyDB);
+    escher.authenticate(req, keyDB);
     res.send("OK");
   } catch(e) {
     res.send("ERROR: " + e.message);

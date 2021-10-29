@@ -1,30 +1,32 @@
-var Escher = require('escher-auth'),
-    koa = require('koa'),
-    router = require('koa-router'),
-    app = koa();
+const Escher = require('escher-auth');
+const Koa = require('koa');
+const Router = require('koa-router');
 
-var escher = new Escher({
-  accessKeyId: 'EscherExample',
-  apiSecret: 'TheBeginningOfABeautifulFriendship'
-});
+const app = new Koa();
 
-var keyDB = function(secretKey) {
-  return "TheBeginningOfABeautifulFriendship";
+const escher = new Escher();
+const keyDB = function(accessKeyId) {
+  return {'EscherExample': 'TheBeginningOfABeautifulFriendship'}[accessKeyId];
 }
 
-app.use(router(app));
+const router = new Router();
 
-app.get('/', function *(next) {
-  this.body = 'Escher Example';
+router.get('/', function(ctx, next) {
+  ctx.body = 'Escher Example';
+  next();
 });
 
-app.get('/validate_request', function *(next) {
+router.get('/validate_request', function(ctx, next) {
   try {
-    escher.validateRequest(this.req, keyDB);
-    this.body = "OK";
+    escher.authenticate(ctx.req, keyDB);
+    ctx.body = "OK";
   } catch(e) {
-    this.body = "ERROR: " + e.message;
+    ctx.body = "ERROR: " + e.message;
   }
+  next();
 });
 
-app.listen(8080);
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .listen(8080);

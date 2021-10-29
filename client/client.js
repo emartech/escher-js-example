@@ -6,6 +6,12 @@ var escher = new Escher({
   apiSecret: 'TheBeginningOfABeautifulFriendship'
 });
 
+var requestDate = (new Date())
+  .toISOString()
+  .replace(/-/g, '')
+  .replace(/:/g, '')
+  .replace(/\..*Z/, 'Z');
+
 var options = {
   host: 'localhost',
   path: '/validate_request',
@@ -13,7 +19,8 @@ var options = {
   method: 'GET',
   url: '/validate_request',
   headers: [
-    ['X-Escher-Date', (new Date).toUTCString()]
+    ['Host', 'localhost'],
+    ['X-Escher-Date', requestDate]
   ]
 }
 

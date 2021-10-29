@@ -3,11 +3,9 @@
   "description": "Example code for Escher.JS HTTP signature library",
   "version": "0.0.1",
   "dependencies": {
-    "escher-auth": "0.0.2",
-    "express": "4.x",
-    "flatiron": "^0.3.11",
-    "koa": "^0.10.0",
-    "koa-router": "^3.3.1",
-    "union": "^0.4.2"
+    "escher-auth": "^3",
+    "express": "^4",
+    "koa": "^2",
+    "koa-router": "^10"
   }
 }

@@ -1,12 +1,10 @@
-var Escher = require('escher-auth'),
-    http = require('http');
+const Escher = require('escher-auth');
+const http = require('http');
 
-var escher = new Escher({
-  accessKeyId: 'EscherExample',
-});
+const escher = new Escher();
 
-var keyDB = function(secretKey) {
-  return "TheBeginningOfABeautifulFriendship";
+const keyDB = function(accessKeyId) {
+  return {'EscherExample': 'TheBeginningOfABeautifulFriendship'}[accessKeyId];
 }
 
 http.createServer(function (req, res) {
@@ -15,7 +13,7 @@ http.createServer(function (req, res) {
   });
   if (req.url === "/validate_request") {
     try {
-      escher.validateRequest(req, keyDB);
+      escher.authenticate(req, keyDB);
       res.end("OK");
     } catch(e) {
       res.end("ERROR: " + e.message);
